@@ -34,8 +34,8 @@ Iniciando repositorio sobre tecnicas de machine learning.
 
 <p align="center">
   <img 
-    width="600"
-    height="450"
+    width="580"
+    height="420"
     src="https://antoniofontanini.com/wp-content/uploads/2019/11/FOTOmit_image_datalabor2_2.gif"
   >
 </p>
