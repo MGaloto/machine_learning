@@ -31,3 +31,11 @@ Iniciando repositorio sobre tecnicas de machine learning.
 <li>
 {NLTK}
 </li>
+
+<p align="center">
+  <img 
+    width="600"
+    height="450"
+    src="https://antoniofontanini.com/wp-content/uploads/2019/11/FOTOmit_image_datalabor2_2.gif"
+  >
+</p>
