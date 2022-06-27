@@ -54,3 +54,43 @@ Este repositorio contiene trabajos sobre entrenamiento de modelos con redes neur
     src="https://antoniofontanini.com/wp-content/uploads/2019/11/FOTOmit_image_datalabor2_2.gif"
   >
 </p>
+
+ # Inputs
+
+ A continuacion se muestra una parte del codigo que se utiliza para generar los inputs de las Redes Neuronales:
+
+```python
+class Model():
+    def __init__(self):
+        self.links = []
+
+    def _colored(self, r, g, b, text):
+        return "\033[38;2;{};{};{}m{} \033[38;2;255;255;255m".format(r, g, b, text)
+      
+    def _input(self):
+        while True:
+            modelo = input('\nDesea entrenar una Red Neuronal? (Si/No): \n')
+            if modelo == 'No':
+                print('Muchas gracias\n')
+                break
+            elif modelo == 'Si':
+                print('Excelente...')
+                scaler   = input('Desea escalar los valores? (Si/No)').lower()
+                neuronas = int(input(f'Ingrese la cantidad de Neuronas:'))
+                outputs  = int(input(f'Ingrese la cantidad de Outputs:'))
+                capas    = int(input(f'Ingrese la cantidad de Capas Ocultas:'))
+                epocas   = int(input(f'Ingrese la cantidad de Epocas:'))
+                    
+            if modelo == 'Si': break
+            else:
+                print(self._colored(238, 75, 43, '\nADVERTENCIA: Por favor colocar (Si/No)\n'))
+        if modelo == 'Si':
+            diccionario = {'capas' : capas, 'neuronas' : neuronas, 'outputs': outputs, 'scaler' : scaler, 'epocas' : epocas}
+            print(self._colored(238, 75, 43,f'La cantidad de Capas es: {capas}'))
+            print(self._colored(238, 75, 43,f'La cantidad de Neuronas es: {neuronas}'))
+            print(self._colored(238, 75, 43,f'La cantidad de Epocas es: {epocas}'))
+            return diccionario
+        else:
+            return None
+
+```
