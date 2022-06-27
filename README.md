@@ -49,8 +49,8 @@ Este repositorio contiene trabajos sobre entrenamiento de modelos con redes neur
   
 <p align="center">
   <img 
-    width="500"
-    height="340"
+    width="450"
+    height="300"
     src="https://antoniofontanini.com/wp-content/uploads/2019/11/FOTOmit_image_datalabor2_2.gif"
   >
 </p>
