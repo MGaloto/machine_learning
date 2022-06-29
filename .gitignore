@@ -1,9 +1,4 @@
-ceiret.csv
-TP_3_16_06.ipynb
-TP_3_lucas.ipynb
-secondary_data.csv
 mush.Rmd
-mush.html
 styles.css
 logo.png
 descarga.png
@@ -12,3 +7,6 @@ work.ipynb
 knn_model_encoder.ipynb
 example.ipynb
 timeseries.ipynb
+*.csv
+*.html
+*.xlsx

@@ -314,7 +314,7 @@ fig.update_layout(
 
 
 <div style="text-align: left" class="toc-box">
-# 4 - Modelo
+# 5 - Modelo
 </div>
 <div style="text-align: right" class="toc-box">
  <a href="#top">Volver al Inicio</a>
@@ -410,7 +410,7 @@ get_metrics(y_test, y_pred, 'Knn')
 
 
 <div style="text-align: left" class="toc-box">
-# 5 - Conclusiones
+# 6 - Conclusiones
 </div>
 <div style="text-align: right" class="toc-box">
  <a href="#top">Volver al Inicio</a>
