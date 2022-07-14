@@ -1,7 +1,6 @@
 from termcolor import colored
 import tensorflow as tf
 import matplotlib.pyplot as plt
-import matplotlib.pyplot as plt
 
 class Model():
     def __init__(self):
@@ -22,12 +21,15 @@ class Model():
                 outputs  = int(input(f'Ingrese la cantidad de Outputs:'))
                 capas    = int(input(f'Ingrese la cantidad de Capas Ocultas:'))
                 epocas   = int(input(f'Ingrese la cantidad de Epocas:'))
-                    
             if modelo == 'Si': break
             else:
                 print(self._colored(238, 75, 43, '\nADVERTENCIA: Por favor colocar (Si/No)\n'))
         if modelo == 'Si':
-            diccionario = {'capas' : capas, 'neuronas' : neuronas, 'outputs': outputs, 'scaler' : scaler, 'epocas' : epocas}
+            diccionario = {  'capas' : capas, 
+                             'neuronas' : neuronas,
+                             'outputs': outputs, 
+                             'scaler' : scaler,
+                             'epocas' : epocas}
             print(self._colored(238, 75, 43,f'La cantidad de Capas es: {capas}'))
             print(self._colored(238, 75, 43,f'La cantidad de Neuronas es: {neuronas}'))
             print(self._colored(238, 75, 43,f'La cantidad de Epocas es: {epocas}'))
@@ -52,16 +54,20 @@ class Model():
             X_test = tf.keras.utils.normalize(X_test, axis = 1)
         for i in range(1, capas + 1):
             print(f'Añadiendo capa Numero {i} al Modelo')
-            capa = tf.keras.layers.Dense(neuronas, activation = tf.nn.relu)
+            capa = tf.keras.layers.Dense(neuronas, activation = 'relu')
             model.add(capa)
-        model.add(tf.keras.layers.Dense(outputs, activation = tf.nn.softmax))
+        model.add(tf.keras.layers.Dense(outputs, activation = 'softmax'))
         print(f'\nINPUTS:\nCapas:     {capas}\nNeuronas: {neuronas}\nOutputs:  {outputs}\nScaler:   {scaler}\n')
         print('\nEntrenando el modelo.....\n')
         print(self._colored(233, 172, 13,f'Por default: Optimizer adam, loss: categorical, metrics: accuracy'))
         model.compile(optimizer = 'adam',
                       loss      = 'sparse_categorical_crossentropy',
                       metrics   = ['accuracy'])
-        historial = model.fit(X_train, y_train, epochs = epocas, verbose = 0)
+        historial = model.fit(X_train, y_train, 
+                              epochs = epocas, 
+                              verbose = 0,
+                              batch_size = 512,
+                              validation_data = (X_test, y_test))
         perdida = [round(loss, 3) for loss in historial.history['loss']]
         acc     = [round(acc, 3)  for acc  in historial.history['accuracy']]
         print(self._colored(233, 128 ,13,f'\n\nPerdida:  {perdida}'))
@@ -71,22 +77,32 @@ class Model():
 
         return historial
 
-    def _get_plots(self, metricas, hyper_p, y_label = 'Metrics'):
+    def _get_plots(self, metricas_train, metricas_test, hyper_p, y_label = 'Metrics'):
         scaler = hyper_p['scaler']
         capas = hyper_p['capas']
         neuronas = hyper_p['neuronas']
         epocas = hyper_p['epocas']
         plt.figure(figsize = (8,5))
         plt.plot(
-                metricas,
+                metricas_train,
                 color = 'blue', 
                 linestyle = 'dashed', 
                 marker = '*', 
-                markerfacecolor = 'red', 
-                markersize = 10)
+                markerfacecolor = 'black', 
+                markersize = 5,
+                label = 'Training')
+        plt.plot(
+                metricas_test,
+                color = 'red', 
+                linestyle = 'dashed', 
+                marker = '*', 
+                markerfacecolor = 'black', 
+                markersize = 5,
+                label = 'Test')
         plt.title(f'Datos {scaler.title()} escalados.', fontsize=16)
         plt.suptitle(f'Capas: {capas}, Neuronas: {neuronas}, Epocas: {epocas}', fontsize=16)
         plt.xlabel('Epocas', fontsize=16); plt.ylabel(y_label, fontsize=16)
+        leg = plt.legend(loc='upper left')
         return plt.grid(); plt.show()
         
 
