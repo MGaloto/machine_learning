@@ -94,3 +94,100 @@ class Model():
             return None
 
 ```
+
+ # Red Neuronal Plot
+
+ Code:
+
+```python
+
+def _plot_neuronal_net(ax, left, right, bottom, top, layer_sizes):
+        n_layers = len(layer_sizes)
+        v_spacing = (top - bottom)/float(max(layer_sizes))
+        h_spacing = (right - left)/float(len(layer_sizes) - 1)
+        # Nodes
+        for n, layer_size in enumerate(layer_sizes):
+            layer_top = v_spacing*(layer_size - 1)/2. + (top + bottom)/2.
+            for m in range(0 , layer_size + 1):
+                circle = plt.Circle((n*h_spacing + left, 
+                                     layer_top - m*v_spacing), 
+                                    v_spacing/4.,
+                                    color='w', 
+                                    ec='k', 
+                                    zorder=3)
+                ax.legend([circle], ['Inputs - Hidden Labels - Outputs'], loc='upper left')
+                ax.add_artist(circle)
+        # Edges
+        for n, (layer_size_a, layer_size_b) in enumerate(zip(layer_sizes[:-1], layer_sizes[1:])):
+            layer_top_a = v_spacing*(layer_size_a - 1)/2. + (top + bottom)/2.
+            layer_top_b = v_spacing*(layer_size_b - 1)/2. + (top + bottom)/2.
+            
+            for m in range(0 ,layer_size_a +1):
+
+                for o in range(0, layer_size_b + 1):
+                    line = plt.Line2D([n*h_spacing + left, (n + 1)*h_spacing + left],
+                                    [layer_top_a - m*v_spacing, layer_top_b - o*v_spacing], 
+                                      c='b', alpha=0.3)
+                    ax.add_artist(line)
+
+fig = plt.figure(figsize=(10, 10))
+ax = fig.gca()
+ax.axis('off')
+_plot_neuronal_net(ax, .01, .75, .05, .9, [10, 15, 15, 15, 15, 10])
+plt.title('Red Neuronal', loc = 'left', fontsize=16)
+
+```
+
+Img:
+
+<p align="center">
+  <img 
+    width="450"
+    height="350"
+    src="img/red.png"
+  >
+</p>
+
+
+ # Metrics
+
+ 
+```python
+
+def _get_plots(metricas_train, metricas_test, hyper_p, y_label = 'Metrics'):
+    capas = hyper_p['capas']
+    epocas = hyper_p['epocas']
+    plt.figure(figsize = (8,5))
+    plt.plot(
+            metricas_train,
+            color = 'blue', 
+            linestyle = 'dashed', 
+            marker = '*', 
+            markerfacecolor = 'black', 
+            markersize = 5,
+            label = 'Training')
+    plt.plot(
+            metricas_test,
+            color = 'red', 
+            linestyle = 'dashed', 
+            marker = '*', 
+            markerfacecolor = 'black', 
+            markersize = 5,
+            label = 'Test')
+    plt.title(f'Datos {y_label}', fontsize=16)
+    plt.suptitle(f'Capas: {capas}, Epocas: {epocas}', fontsize=16)
+    plt.xlabel('Epocas', fontsize=16); plt.ylabel(y_label, fontsize=16)
+    leg = plt.legend(loc='upper left')
+    return plt.grid(); plt.show()
+
+```
+
+Img:
+
+<p align="center">
+  <img 
+    width="450"
+    height="350"
+    src="img/results.png"
+  >
+</p>
