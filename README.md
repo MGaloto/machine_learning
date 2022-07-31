@@ -143,7 +143,7 @@ Img:
 <p align="center">
   <img 
     width="450"
-    height="350"
+    height="400"
     src="img/red.png"
   >
 </p>
@@ -186,8 +186,8 @@ Img:
 
 <p align="center">
   <img 
-    width="450"
-    height="350"
+    width="500"
+    height="600"
     src="img/results.png"
   >
 </p>
